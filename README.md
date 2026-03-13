@@ -9,7 +9,7 @@ This repository contains my configuration files for **Fastfetch** , **Kitty** ,*
 ## 🖼️ Preview
 
 ### Fastfetch
-![Fastfetch Preview](Fastfetch/assets/fastfetch.png)
+![Fastfetch Preview](Fastfetch/assets/fastfetch1.png)
 
 ---
 
