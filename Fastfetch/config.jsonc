@@ -57,8 +57,9 @@
   "modules": [
     {
       "type": "os",
-      "key": " DISTRO  ",
-      "keyColor": "#FFD000"
+      "key": " DISTRO ",
+      "keyColor": "#FFD000",
+      "format": "Fedora Linux 43 (Workstation)"
     },
     {
       "type": "kernel",
@@ -67,7 +68,6 @@
     },
     {
       "type": "packages",
-      "format":"{} (pkg)",
       "key": "├ 󰏖  Packages",
       "keyColor": "#FFD000"
     },
@@ -96,24 +96,22 @@
     {
       "type": "host",
       "key": "󰍹 PC ",
-      "keyColor": "#FF0035"
+      "keyColor": "#FF0035",
+      "format": "Lenovo G-80"
+      
     },
     {
       "type": "cpu",
       "key": "├   Cpu",
-      "keyColor": "#FF0035"
+      "keyColor": "#FF0035",
+      "format": "Intel(R) Core(TM) i5-5200U"
+      
     },
     {
       "type": "gpu",
-      "key": "├ 󰾲  Gpu",
+      "key": "├ 󰾲  GPU",
       "keyColor": "#FF0035",
-      "driverSpecific": false,
-      "detectionMethod": "auto",
-      "percent": {
-        "green": 50,
-        "yellow": 80,
-        "type": 0
-      }
+      "format": "{vendor} {name} [{type}]"
     },
     {
       "type": "memory",
@@ -137,7 +135,7 @@
     },
     {
       "type": "disk",
-      "key": "├ 󰋊  Disk",
+      "key": "└ 󰋊  Disk",
       "keyColor": "#FF0035",
       "folders": [ "/" ],
       "useAvailable": false,
