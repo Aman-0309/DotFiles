@@ -1,15 +1,15 @@
 # 🧰 DotFiles
 
-✨ Personal Linux dotfiles for a **clean, fast, and aesthetic terminal setup**.
+✨ Personal Linux dotfiles for a **clean, fast, and aesthetic terminal & desktop setup**.
 
-This repository contains my configuration files for **Fastfetch** , **Kitty** ,**Zsh** , **Starship** and , organized in a simple, modular, and reproducible way.
+This repository contains configuration files for **Fastfetch, Kitty, Zsh, Fish, Starship, Btop, Niri, Zed, and DMS** — organized in a simple, modular, and reproducible way.
 
 ---
 
 ## 🖼️ Preview
 
 ### Fastfetch
-![Fastfetch Preview](Fastfetch/assets/fastfetch1.png)
+![Fastfetch Preview](Fastfetch/assets/fastfetch2.png)
 
 ---
 
@@ -17,17 +17,33 @@ This repository contains my configuration files for **Fastfetch** , **Kitty** ,*
 
 ```text
 .
+├── Btop
+│   ├── btop.conf
+│   └── themes
+│       └── current.theme
+├── Dms
+│   ├── setting.json
+│   └── zen.css
 ├── Fastfetch
 │   ├── assets
-│   │   ├── ascii2.txt        # Custom ASCII logo
-│   │   └── fastfetch.png     # Fastfetch preview image
-│   └── config.jsonc          # Fastfetch configuration
+│   │   ├── ascii2.txt
+│   │   ├── fastfetch1.png
+│   │   └── fastfetch.png
+│   └── config.jsonc
+├── Fish
+│   └── config.fish
 ├── Kitty
-│   └── kitty.conf            # Kitty terminal config
+│   └── kitty.conf
+├── Niri
+│   └── config.kdl
 ├── Starship
-│   └── starship.toml         # Starship prompt config
+│   ├── starship.toml
+│   ├── starship_first.toml
+│   └── starship-fish.toml
+├── Zed
+│   └── settings.json
 ├── Zsh
-│   └── .zshrc                # Zsh configuration
+│   └── .zshrc
 └── README.md
 ```
 
@@ -35,66 +51,91 @@ This repository contains my configuration files for **Fastfetch** , **Kitty** ,*
 
 ## 🖥️ Tools & Stack
 
-- **Shell**: Zsh  
-- **Prompt**: Starship  
-- **Terminal Emulator**: Kitty  
-- **System Fetch**: Fastfetch  
-- **Fonts**: Nerd Fonts (required for icons)
+| Tool | Purpose |
+|------|---------|
+| Zsh, Fish | Shells |
+| Starship | Prompt |
+| Kitty | Terminal Emulator |
+| Fastfetch | System Fetch |
+| Btop | System Monitor |
+| Niri | Compositor / WM |
+| Zed | Editor |
+| DMS | Launcher / Custom UI |
+| Nerd Fonts | Icons (required) |
 
 ---
 
 ## ⚙️ Installation
 
-### 1️⃣ Clone the repository
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/Aman-0309/DotFiles.git ~/DotFiles
 ```
 
----
-
-### 2️⃣ Create symbolic links (recommended)
+### 2️⃣ Create Symbolic Links
 
 Using symlinks keeps your `$HOME` clean and allows easy syncing across systems.
 
-#### Zsh
+#### 🐚 Zsh
 ```bash
 ln -s ~/DotFiles/Zsh/.zshrc ~/.zshrc
 ```
 
-#### Starship
+#### 🐟 Fish
+```bash
+mkdir -p ~/.config/fish
+ln -s ~/DotFiles/Fish/config.fish ~/.config/fish/config.fish
+```
+
+#### 🚀 Starship
 ```bash
 mkdir -p ~/.config
 ln -s ~/DotFiles/Starship/starship.toml ~/.config/starship.toml
 ```
 
-#### Fastfetch
+> For Fish users:
+> ```bash
+> ln -s ~/DotFiles/Starship/starship-fish.toml ~/.config/starship.toml
+> ```
+
+#### ⚡ Fastfetch
 ```bash
 mkdir -p ~/.config/fastfetch
 ln -s ~/DotFiles/Fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
 ln -s ~/DotFiles/Fastfetch/assets ~/.config/fastfetch/assets
 ```
 
-#### Kitty
+#### 🐱 Kitty
 ```bash
 mkdir -p ~/.config/kitty
 ln -s ~/DotFiles/Kitty/kitty.conf ~/.config/kitty/kitty.conf
 ```
 
----
-
-## 🚀 Enable Starship
-
-Make sure this line exists at the **end** of your `~/.zshrc`:
-
-```zsh
-eval "$(starship init zsh)"
+#### 📊 Btop
+```bash
+mkdir -p ~/.config/btop
+ln -s ~/DotFiles/Btop/btop.conf ~/.config/btop/btop.conf
+ln -s ~/DotFiles/Btop/themes ~/.config/btop/themes
 ```
 
-Reload the shell:
-
+#### 🧊 Niri
 ```bash
-source ~/.zshrc
+mkdir -p ~/.config/niri
+ln -s ~/DotFiles/Niri/config.kdl ~/.config/niri/config.kdl
+```
+
+#### 📝 Zed
+```bash
+mkdir -p ~/.config/zed
+ln -s ~/DotFiles/Zed/settings.json ~/.config/zed/settings.json
+```
+
+#### 🎨 DMS
+```bash
+mkdir -p ~/.config/dms
+ln -s ~/DotFiles/Dms/setting.json ~/.config/dms/setting.json
+ln -s ~/DotFiles/Dms/zen.css ~/.config/dms/zen.css
 ```
 
 ---
@@ -104,38 +145,30 @@ source ~/.zshrc
 Make sure the following packages are installed:
 
 - `zsh`
+- `fish`
 - `starship`
 - `kitty`
 - `fastfetch`
+- `btop`
 - `git`
-- **Nerd Font**  
-  (JetBrainsMono Nerd Font)
+- `niri`
+- `zed`
+- Nerd Font *(JetBrainsMono Nerd Font recommended)*
 
 ---
 
 ## 🎨 Features
 
-- Clean and consistent color theme  
-- Nerd Font icons support  
-- Starship prompt matched with Fastfetch styling  
-- Modular dotfiles structure  
-- Easy to extend (Neovim, tmux, etc.)
+- ✅ Clean and consistent UI across tools
+- ✅ Nerd Font icons support
+- ✅ Unified theme across terminal + system tools
+- ✅ Multi-shell support (Zsh + Fish)
+- ✅ Modular dotfiles structure
+- ✅ Easy to extend (Neovim, tmux, etc.)
 
 ---
 
-## 🛠️ Customization
-
-- Tweak terminal appearance → `Kitty/kitty.conf`
-- Adjust system info layout → `Fastfetch/config.jsonc`
-- Modify prompt behavior → `Starship/starship.toml`
-- Add aliases/functions → `Zsh/.zshrc`
-
----
 
 ## 📜 License
 
-These dotfiles are for personal use.  
-Feel free to fork, adapt, and customize them for your own setup.
-
----
-
+These dotfiles are for personal use. Feel free to fork, adapt, and customize them for your own setup.
