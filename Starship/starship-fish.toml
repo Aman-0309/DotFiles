@@ -1,0 +1,93 @@
+add_newline = true
+
+format = """
+[](fg:#4480b5)\
+$os\
+$username\
+[](bg:#8ebad9 fg:#4480b5)\
+$directory\
+[](bg:#6fa4cc fg:#8ebad9)\
+$git_branch\
+$git_status\
+[](bg:#5c90b8 fg:#6fa4cc)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$python\
+$java\
+[](fg:#5c90b8)
+$character
+"""
+
+# ───────── OS ─────────
+[os]
+disabled = false
+style = "bg:#4480b5 fg:#fdf5e6"
+symbols.Fedora = " "
+
+# ───────── USER ─────────
+[username]
+show_always = true
+style_user = "bg:#4480b5 fg:#fdf5e6"
+format = "[$user]($style)"
+
+# ───────── DIRECTORY ─────────
+[directory]
+style = "bg:#8ebad9 fg:#0a2540"
+format = "[ $path ]($style)"
+truncation_length = 3
+fish_style_pwd_dir_length = 1
+
+[directory.substitutions]
+Documents = "󰈙 "
+Downloads = " "
+Music = "󰝚 "
+Pictures = " "
+Developer = "󰲋 "
+
+# ───────── GIT ─────────
+[git_branch]
+symbol = " "
+style = "bg:#6fa4cc fg:#0a2540"
+format = "[ $symbol$branch ]($style)"
+
+[git_status]
+style = "bg:#6fa4cc fg:#0a2540"
+format = "[($all_status$ahead_behind )]($style)"
+
+# ───────── LANGUAGES ─────────
+[nodejs]
+symbol = " "
+style = "bg:#5c90b8 fg:#0a2540"
+format = "[ $symbol($version) ]($style)"
+
+[python]
+symbol = " "
+style = "bg:#5c90b8 fg:#0a2540"
+format = "[ $symbol($version) ]($style)"
+
+[golang]
+symbol = " "
+style = "bg:#5c90b8 fg:#0a2540"
+format = "[ $symbol($version) ]($style)"
+
+[rust]
+symbol = " "
+style = "bg:#5c90b8 fg:#0a2540"
+format = "[ $symbol($version) ]($style)"
+
+[c]
+symbol = " "
+style = "bg:#5c90b8 fg:#0a2540"
+format = "[ $symbol($version) ]($style)"
+
+[java]
+symbol = " "
+style = "bg:#5c90b8 fg:#0a2540"
+format = "[ $symbol($version) ]($style)"
+
+# ───────── CHARACTER ─────────
+[character]
+success_symbol = "[ ❯](bold #8ebad9)"
+error_symbol = "[ ❯](bold #d97d75)"⏎  
