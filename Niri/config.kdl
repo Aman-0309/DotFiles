@@ -77,7 +77,9 @@ layout {
 // =======================
 // STARTUP
 // =======================
-spawn-at-startup "dms" "run"
+
+
+spawn-at-startup "noctalia"   // Noctalia Shell: bar, dock, panels, lock screen
 
 
 // =======================
@@ -218,103 +220,120 @@ window-rule {
     clip-to-geometry true
 }
 
+window-rule {
+    match app-id=r#"^kitty$"#
+
+    // Draw the focus ring AROUND kitty instead of filling the whole window
+    // behind it (the fill showed through the transparency and made kitty look
+    // fully opaque whenever it was focused).
+    draw-border-with-background false
+
+    // Frosted-glass blur behind kitty.
+    background-effect {
+        blur true
+    }
+}
+
 binds {
 
     // === System & Overview ===
     Mod+o repeat=false { toggle-overview; }
         // Mod+Tab repeat=false { toggle-overview; }
     Mod+Shift+Slash { show-hotkey-overlay; }
-    
+
 // === Application Launchers ===
     Alt+O {
         spawn "flatpak" "run" "md.obsidian.Obsidian";
     }
-    
+
     Alt+Z hotkey-overlay-title="Zen Browser" {
     spawn "flatpak" "run" "app.zen_browser.zen";
     }
-    
+
     Alt+T hotkey-overlay-title="Zed Editor" {
         spawn "zed";
     }
-    
+
     Alt+H hotkey-overlay-title="Helium Browser" {
         spawn "helium";
     }
-   
-    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
-       // Mod+D hotkey-overlay-title="Rofi" { spawn "rofi" "-show" "drun"; }
 
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
+
+    // --- Noctalia shell panels (all toggle via `noctalia msg panel-toggle <id>`) ---
     Mod+Space hotkey-overlay-title="Application Launcher" {
-        spawn "dms" "ipc" "call" "spotlight" "toggle";
+        spawn "noctalia" "msg" "panel-toggle" "launcher";
     }
     Mod+V hotkey-overlay-title="Clipboard Manager" {
-        spawn "dms" "ipc" "call" "clipboard" "toggle";
+        spawn "noctalia" "msg" "panel-toggle" "clipboard";
     }
-    Ctrl+Shift+Escape hotkey-overlay-title="Task Manager" {
-        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+    Mod+G hotkey-overlay-title="Control Center: Home" {
+        spawn "noctalia" "msg" "panel-toggle" "control-center" "home";
+    }
+    Ctrl+Shift+Escape hotkey-overlay-title="Task Manager (System Monitor)" {
+        spawn "noctalia" "msg" "panel-toggle" "control-center" "system";
     }
 
-    Super+X hotkey-overlay-title="Power Menu: Toggle" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Super+X hotkey-overlay-title="Power Menu: Toggle" { spawn "noctalia" "msg" "panel-toggle" "session"; }
     Mod+Comma hotkey-overlay-title="Settings" {
-        spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+        spawn "noctalia" "msg" "settings-toggle";
     }
     Mod+Y hotkey-overlay-title="Browse Wallpapers" {
-        spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+        spawn "noctalia" "msg" "panel-toggle" "wallpaper";
     }
     Mod+M hotkey-overlay-title="Browse media" {
-        spawn "dms" "ipc" "call" "dankdash" "media";
+        spawn "noctalia" "msg" "panel-toggle" "control-center" "media";
     }
-    Mod+N hotkey-overlay-title="Notification Center" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-    Mod+Shift+N hotkey-overlay-title="Notepad" { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+    Mod+N hotkey-overlay-title="Notification Center" { spawn "noctalia" "msg" "panel-toggle" "control-center" "notifications"; }
 
     // === Security ===
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
-        spawn "dms" "ipc" "call" "lock" "lock";
+        spawn "noctalia" "msg" "session" "lock";
     }
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" {
-        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+        spawn "noctalia" "msg" "panel-toggle" "control-center" "system";
     }
 
     // === Audio Controls ===
     XF86AudioRaiseVolume allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "increment" "3";
+        spawn "noctalia" "msg" "volume-up" "3";
     }
     XF86AudioLowerVolume allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "decrement" "3";
+        spawn "noctalia" "msg" "volume-down" "3";
     }
     XF86AudioMute allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "mute";
+        spawn "noctalia" "msg" "volume-mute";
     }
     XF86AudioMicMute allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "micmute";
+        spawn "noctalia" "msg" "mic-mute";
     }
+    // --- Media keys (MPRIS via Noctalia) ---
 		XF86AudioPause allow-when-locked=true {
-		    spawn "dms" "ipc" "call" "mpris" "playPause";
+		    spawn "noctalia" "msg" "media" "toggle";
 		}
 		XF86AudioPlay allow-when-locked=true {
-		    spawn "dms" "ipc" "call" "mpris" "playPause";
+		    spawn "noctalia" "msg" "media" "toggle";
 		}
 		XF86AudioPrev allow-when-locked=true {
-		    spawn "dms" "ipc" "call" "mpris" "previous";
+		    spawn "noctalia" "msg" "media" "previous";
 		}
 		XF86AudioNext allow-when-locked=true {
-		    spawn "dms" "ipc" "call" "mpris" "next";
+		    spawn "noctalia" "msg" "media" "next";
 		}
         Ctrl+XF86AudioRaiseVolume allow-when-locked=true {
-            spawn "dms" "ipc" "call" "mpris" "increment" "3";
+            spawn "noctalia" "msg" "volume-up" "3";
         }
         Ctrl+XF86AudioLowerVolume allow-when-locked=true {
-            spawn "dms" "ipc" "call" "mpris" "decrement" "3";
+            spawn "noctalia" "msg" "volume-down" "3";
         }
 
     // === Brightness Controls ===
     XF86MonBrightnessUp allow-when-locked=true {
-       spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+       spawn "noctalia" "msg" "brightness-up" "5%";
     }
     XF86MonBrightnessDown allow-when-locked=true {
-       spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+       spawn "noctalia" "msg" "brightness-down" "5%";
     }
 
     // === Window Management ===
@@ -324,7 +343,6 @@ binds {
     Mod+Shift+T { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+W { toggle-column-tabbed-display; }
-    Mod+Shift+W hotkey-overlay-title="Create window rule" { spawn "dms" "ipc" "call" "window-rules" "toggle"; }
 
     // === Focus Navigation ===
     Mod+Left  { focus-column-left; }
@@ -383,9 +401,6 @@ binds {
     Mod+Ctrl+I         { move-column-to-workspace-up; }
 
     // === Workspace Management ===
-    Ctrl+Shift+R hotkey-overlay-title="Rename Workspace" {
-        spawn "dms" "ipc" "call" "workspace-rename" "open";
-    }
 
     // === Move Workspaces ===
     Mod+Shift+Page_Down { move-workspace-down; }
@@ -467,6 +482,42 @@ binds {
     //Reboot
     Mod+Ctrl+Alt+R { spawn-sh "systemctl reboot"; }
 
-
-
 }
+
+// =======================
+// BLUR STRENGTH (global — applies to kitty + noctalia panels)
+// niri has no 0-1 value; strength comes from passes x offset.
+// Default is passes 3, offset 3.0 — this is about half of that.
+// Raise "passes" to 2 or 3 for stronger frost.
+// =======================
+blur {
+    passes 1
+    offset 2.5
+}
+
+// =======================
+// NOCTALIA PANEL EFFECTS
+// Frosted-glass blur behind all Noctalia floating panels
+// (launcher, control center, session/power menu, clipboard, wallpaper).
+// Requires niri 26.04+ ("background-effect" layer rule).
+// =======================
+layer-rule {
+    match namespace="^noctalia-panel$"
+
+    background-effect {
+        blur true
+    }
+}
+
+// Noctalia theme template (focus-ring / border / shadow colors) — regenerated by
+// Noctalia when the palette changes; edit those colors in Settings → Appearance.
+
+
+
+
+
+
+
+
+include "noctalia.kdl"
+        
